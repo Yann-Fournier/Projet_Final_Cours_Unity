@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     public GameObject Player;
     private void Start()
     {
+        Cursor.visible = false; // Affiche le curseur de la souris
+        Cursor.lockState = CursorLockMode.Locked; // Locke la souris au milieu de l'écran
         if (Instance == null)
         {
             Instance = this;
