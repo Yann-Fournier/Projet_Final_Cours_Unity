@@ -15,16 +15,19 @@ public class PlayerBehevior : MonoBehaviour
     [SerializeField] Transform mainCamera; // Référence à la Transforme de la caméra principale
     [SerializeField] Animator CharacterAnimator;
     
-    private bool _isGrounded = true;
-    private bool _isCrouch;
     private Rigidbody _rb;
     private Transform _t;
+    private CapsuleCollider _c;
+    
     private float _rotationSpeed = 8f;
+    private bool _isJumping;
+    private bool _isCrouch;
 
     private void Start()
     {
         _rb = GetComponent<Rigidbody>();
         _t = GetComponent<Transform>();
+        _c = GetComponent<CapsuleCollider>();
     }
 
     // Update is called once per frame
@@ -46,7 +49,8 @@ public class PlayerBehevior : MonoBehaviour
         {
             CharacterAnimator.SetBool("IsCrouching", true);
             speed = moveSpeed - crouchSpeed;
-            _t.localScale = new Vector3(1f, 0.6f, 1f);
+            _c.height = 1.5f;
+            _c.center = new Vector3(0, -0.21f, 0);
             _isCrouch = true;
         }
         else // Vitesse normal
@@ -58,6 +62,8 @@ public class PlayerBehevior : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.CapsLock)) // Se relever
         {
             CharacterAnimator.SetBool("IsCrouching", false);
+            _c.height = 1.9f;
+            _c.center = new Vector3(0, 0, 0);
             _isCrouch = false;
         }
         
@@ -97,18 +103,19 @@ public class PlayerBehevior : MonoBehaviour
             Vector3 forwardRelative = -speed * cameraForward;
             _rb.AddForce(forwardRelative);
         }
-        if (Input.GetKeyDown(KeyCode.Space) && _isGrounded) // Saut
+        if (Input.GetKeyDown(KeyCode.Space) && !_isJumping && !_isCrouch) // Saut
         {
             _rb.AddForce(new Vector3(0, jumpForce, 0));
-            _isGrounded = false;
+            _isJumping = true;
         }
         
         // Récupération de la vitesse pour faire les animations 
         CharacterAnimator.SetFloat("Speed", _rb.velocity.magnitude);
+        CharacterAnimator.SetBool("IsJumping", _isJumping);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        _isGrounded = true;
+        _isJumping= false;
     }
 }
