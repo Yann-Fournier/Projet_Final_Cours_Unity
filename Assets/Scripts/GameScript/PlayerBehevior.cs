@@ -22,6 +22,8 @@ public class PlayerBehevior : MonoBehaviour
     private float _rotationSpeed = 8f;
     private bool _isJumping;
     private bool _isCrouch;
+    private bool _isOnSpine;
+    private bool _stopOnSpine;
 
     private void Start()
     {
@@ -65,6 +67,14 @@ public class PlayerBehevior : MonoBehaviour
             _c.height = 1.9f;
             _c.center = new Vector3(0, 0, 0);
             _isCrouch = false;
+        }
+
+        if (_isOnSpine && _rb.velocity.magnitude < 10)
+        {
+            // print(_rb.velocity.magnitude);
+            // _rb.drag = 205f;
+            // _rb.drag = 4f;
+            speed += (50 * Time.deltaTime); // 10500
         }
         
         if (Input.GetKey(KeyCode.D)) // droite
@@ -126,6 +136,19 @@ public class PlayerBehevior : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        _isJumping= false;
+        if (collision.gameObject.tag == "Spine")
+        {
+            _isOnSpine = true;
+        }
+        _isJumping = false;
+    }
+    
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.tag == "Spine")
+        {
+            _rb.drag = 2f;
+            _isOnSpine = false;
+        }
     }
 }
