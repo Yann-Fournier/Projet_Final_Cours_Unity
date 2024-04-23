@@ -43,19 +43,19 @@ public class PlayerBehevior : MonoBehaviour
         
         if (Input.GetKey(KeyCode.LeftShift) && !_isCrouch) // Sprinter
         {
-            speed = moveSpeed + sprintSpeed;
+            speed = (moveSpeed + sprintSpeed) * Time.deltaTime;
         }
         else if (Input.GetKey(KeyCode.CapsLock)) // S'accroupir
         {
             CharacterAnimator.SetBool("IsCrouching", true);
-            speed = moveSpeed - crouchSpeed;
+            speed = (moveSpeed - crouchSpeed) * Time.deltaTime;
             _c.height = 1.5f;
             _c.center = new Vector3(0, -0.21f, 0);
             _isCrouch = true;
         }
         else // Vitesse normal
         {
-            speed = moveSpeed;
+            speed = moveSpeed * Time.deltaTime;
             _t.localScale = new Vector3(1f, 1f, 1f);
         }
         
@@ -107,6 +107,16 @@ public class PlayerBehevior : MonoBehaviour
         {
             _rb.AddForce(new Vector3(0, jumpForce, 0));
             _isJumping = true;
+        }
+        
+        if (Input.GetKey(KeyCode.Mouse0)) // Saut
+        {
+            CharacterAnimator.SetBool("IsAttacking", true);
+            _rb.velocity = new Vector3(0, 0, 0);
+        }
+        else
+        {
+            CharacterAnimator.SetBool("IsAttacking", false);
         }
         
         // Récupération de la vitesse pour faire les animations 
