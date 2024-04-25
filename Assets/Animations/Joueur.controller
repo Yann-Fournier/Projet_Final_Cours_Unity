@@ -97,7 +97,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 4
     m_ConditionEvent: Speed
-    m_EventTreshold: 1
+    m_EventTreshold: 0.5
   - m_ConditionMode: 2
     m_ConditionEvent: IsAttacking
     m_EventTreshold: 0
@@ -131,7 +131,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 3
     m_ConditionEvent: Speed
-    m_EventTreshold: 1
+    m_EventTreshold: 0.5
   - m_ConditionMode: 2
     m_ConditionEvent: IsJumping
     m_EventTreshold: 0
@@ -354,7 +354,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 4
     m_ConditionEvent: Speed
-    m_EventTreshold: 1
+    m_EventTreshold: 0.5
   - m_ConditionMode: 2
     m_ConditionEvent: IsCrouching
     m_EventTreshold: 0
@@ -561,7 +561,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 4
     m_ConditionEvent: Speed
-    m_EventTreshold: 1
+    m_EventTreshold: 0.5
   - m_ConditionMode: 2
     m_ConditionEvent: IsCrouching
     m_EventTreshold: 0
@@ -745,25 +745,25 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: IsCrouching
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: IsJumping
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: IsAttacking
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Mooving
@@ -799,7 +799,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 4
     m_ConditionEvent: Speed
-    m_EventTreshold: 1
+    m_EventTreshold: 0.5
   - m_ConditionMode: 2
     m_ConditionEvent: IsCrouching
     m_EventTreshold: 0
@@ -905,7 +905,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 4
     m_ConditionEvent: Speed
-    m_EventTreshold: 1
+    m_EventTreshold: 0.5
   - m_ConditionMode: 2
     m_ConditionEvent: IsJumping
     m_EventTreshold: 0
@@ -967,7 +967,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 3
     m_ConditionEvent: Speed
-    m_EventTreshold: 1
+    m_EventTreshold: 0.5
   - m_ConditionMode: 2
     m_ConditionEvent: IsCrouching
     m_EventTreshold: 0
@@ -1215,7 +1215,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 3
     m_ConditionEvent: Speed
-    m_EventTreshold: 1
+    m_EventTreshold: 0.5
   - m_ConditionMode: 2
     m_ConditionEvent: IsJumping
     m_EventTreshold: 0
@@ -1403,7 +1403,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 3
     m_ConditionEvent: Speed
-    m_EventTreshold: 1
+    m_EventTreshold: 0.5
   - m_ConditionMode: 2
     m_ConditionEvent: IsCrouching
     m_EventTreshold: 0
