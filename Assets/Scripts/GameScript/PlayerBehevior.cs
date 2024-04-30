@@ -11,6 +11,7 @@ public class PlayerBehevior : MonoBehaviour
     [SerializeField] float sprintSpeed;
     [SerializeField] float crouchSpeed;
     [SerializeField] float jumpForce;
+    [SerializeField] float climbSpeed;
     
     [SerializeField] Transform mainCamera; // Référence à la Transforme de la caméra principale
     [SerializeField] Animator CharacterAnimator;
@@ -18,10 +19,12 @@ public class PlayerBehevior : MonoBehaviour
     private Rigidbody _rb;
     private Transform _t;
     private CapsuleCollider _c;
+    private GameObject _playerHand;
     
     private float _rotationSpeed = 8f;
     private bool _isJumping;
     private bool _isCrouch;
+    private bool _isOnLadder;
     private bool _isOnSpine;
     private bool _stopOnSpine;
     private bool _isAttaking;
@@ -35,6 +38,73 @@ public class PlayerBehevior : MonoBehaviour
 
     // Update is called once per frame
     void Update()
+    {
+        if (_isOnLadder)
+        {
+            VerticalMoves();
+        }
+        else
+        {
+            HorizontalMoves();
+        }
+        
+        // Set des variables d'Animations
+        CharacterAnimator.SetFloat("Speed", _rb.velocity.magnitude);
+        CharacterAnimator.SetBool("IsJumping", _isJumping);
+        CharacterAnimator.SetBool("IsCrouching", _isCrouch);
+        CharacterAnimator.SetBool("OnLadder", _isOnLadder);
+        CharacterAnimator.SetBool("IsAttacking", _isAttaking);
+    }
+    
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Spine")
+        {
+            _isOnSpine = true;
+        }
+        else if (collision.gameObject.tag == "Ladder")
+        {
+            _isOnLadder = true;
+            _rb.useGravity = false;
+            _playerHand = GameManager.Instance.PlayerHand.transform.GetChild(0).gameObject;
+            if (_playerHand.transform.childCount > 0)
+            {
+                _playerHand.SetActive(false);
+            }
+            
+        }
+        else if (collision.gameObject.tag == "LadderFloor" && _isOnLadder)
+        {
+            _isOnLadder = false;
+            _playerHand = GameManager.Instance.PlayerHand.transform.GetChild(0).gameObject;
+            if (_playerHand.transform.childCount > 0)
+            {
+                _playerHand.SetActive(true);
+            }
+        }
+        _isJumping = false;
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.tag == "Spine")
+        {
+            _rb.drag = 2f;
+            _isOnSpine = false;
+        } 
+        else if (collision.gameObject.tag == "Ladder")
+        {
+            _isOnLadder = false;
+            _rb.useGravity = true;
+            _playerHand = GameManager.Instance.PlayerHand.transform.GetChild(0).gameObject;
+            if (_playerHand.transform.childCount > 0)
+            {
+                _playerHand.SetActive(true);
+            }
+        }
+    }
+
+    private void HorizontalMoves()
     {
         float speed; // vitesse de déplacement
         
@@ -50,7 +120,6 @@ public class PlayerBehevior : MonoBehaviour
         }
         else if (Input.GetKey(KeyCode.CapsLock)) // S'accroupir
         {
-            CharacterAnimator.SetBool("IsCrouching", true);
             speed = (moveSpeed - crouchSpeed) * Time.deltaTime;
             _c.height = 1.5f;
             _c.center = new Vector3(0, -0.21f, 0);
@@ -64,7 +133,7 @@ public class PlayerBehevior : MonoBehaviour
         
         if (Input.GetKeyUp(KeyCode.CapsLock)) // Se relever
         {
-            CharacterAnimator.SetBool("IsCrouching", false);
+            
             _c.height = 1.9f;
             _c.center = new Vector3(0, 0, 0);
             _isCrouch = false;
@@ -122,34 +191,18 @@ public class PlayerBehevior : MonoBehaviour
         
         if (Input.GetKey(KeyCode.Mouse0) && GameManager.Instance.PlayerHand.transform.childCount > 0) // Saut
         {
-            CharacterAnimator.SetBool("IsAttacking", true);
             _rb.velocity = new Vector3(0, 0, 0);
+            _isAttaking = true;
         }
         else
         {
-            CharacterAnimator.SetBool("IsAttacking", false);
+            _isAttaking = false;
         }
-        
-        // Récupération de la vitesse pour faire les animations 
-        CharacterAnimator.SetFloat("Speed", _rb.velocity.magnitude);
-        CharacterAnimator.SetBool("IsJumping", _isJumping);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void VerticalMoves()
     {
-        if (collision.gameObject.tag == "Spine")
-        {
-            _isOnSpine = true;
-        }
-        _isJumping = false;
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.tag == "Spine")
-        {
-            _rb.drag = 2f;
-            _isOnSpine = false;
-        }
+        float verticalInput = Input.GetAxis("Vertical"); // mouvement vertical
+        transform.Translate(Vector3.up * verticalInput * climbSpeed * Time.deltaTime);
     }
 }
