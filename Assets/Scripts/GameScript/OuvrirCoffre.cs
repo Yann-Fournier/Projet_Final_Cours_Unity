@@ -11,10 +11,11 @@ public class OuvrirCoffre : MonoBehaviour
     [SerializeField] public GameObject PrendreCanvas;
     [SerializeField] public Animator OpenCoffre;
     [SerializeField] public GameObject Weapon;
-    [SerializeField] public GameObject PlayerHand;
         
     private bool _isInTrigger;
     private bool _isOpen;
+    private GameObject _test; 
+    
 
     private void Start()
     {
@@ -48,6 +49,17 @@ public class OuvrirCoffre : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        _test = GameManager.Instance.PlayerHand;
+        
+        if (_test.transform.childCount > 0)
+        {
+            print("has Child");
+        }
+        else
+        {
+            print("don't has child");
+        }
+        
         if (!_isOpen)
         {
             OpenCanvas.SetActive(true);
