@@ -123,8 +123,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd60f8695e8204f4bb58595b2d91edd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OpenCanvas: {fileID: 7179898917038259183, guid: cc84faa33436e0e4bbd68bd7b1e15f4b,
-    type: 3}
+  OpenCanvas: {fileID: 0}
+  PrendreCanvas: {fileID: 0}
   OpenCoffre: {fileID: -8827613924960168577}
   Weapon: {fileID: 1643777858445294652}
 --- !u!95 &-8827613924960168577
