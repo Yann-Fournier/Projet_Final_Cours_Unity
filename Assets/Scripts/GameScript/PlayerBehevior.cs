@@ -24,6 +24,7 @@ public class PlayerBehevior : MonoBehaviour
     private bool _isCrouch;
     private bool _isOnSpine;
     private bool _stopOnSpine;
+    private bool _isAttaking;
 
     private void Start()
     {
@@ -119,7 +120,7 @@ public class PlayerBehevior : MonoBehaviour
             _isJumping = true;
         }
         
-        if (Input.GetKey(KeyCode.Mouse0)) // Saut
+        if (Input.GetKey(KeyCode.Mouse0) && GameManager.Instance.PlayerHand.transform.childCount > 0) // Saut
         {
             CharacterAnimator.SetBool("IsAttacking", true);
             _rb.velocity = new Vector3(0, 0, 0);
