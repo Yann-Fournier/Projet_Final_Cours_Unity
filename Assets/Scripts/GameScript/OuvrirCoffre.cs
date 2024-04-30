@@ -7,9 +7,15 @@ public class OuvrirCoffre : MonoBehaviour
 {
     [SerializeField] public GameObject OpenCanvas;
     [SerializeField] public Animator OpenCoffre;
+    [SerializeField] public GameObject Weapon;
 
     private bool _isInTrigger;
     private bool _isOpen;
+
+    private void Start()
+    {
+        Weapon.SetActive(false);
+    }
 
     // Update is called once per frame
     void Update()
@@ -20,7 +26,9 @@ public class OuvrirCoffre : MonoBehaviour
             {
                 _isOpen = true;
                 OpenCoffre.SetBool("isOpen", _isOpen);
+                StartCoroutine(GameManager.PauseRoutine());
                 OpenCanvas.SetActive(false);
+                Weapon.SetActive(true);
             }
         }
     }

@@ -22,4 +22,9 @@ public class GameManager : MonoBehaviour
         
         DontDestroyOnLoad(gameObject);
     }
+    
+    public static IEnumerator PauseRoutine()
+    {
+        yield return new WaitForSeconds(3); // Pause de 3 secondes
+    }
 }
