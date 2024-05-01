@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.Design.Serialization;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -28,6 +29,9 @@ public class PlayerBehevior : MonoBehaviour
     private bool _isOnSpine;
     private bool _stopOnSpine;
     private bool _isAttaking;
+    private bool _hasCollided;
+    
+    private KeyCode[] _keysINeed = { KeyCode.W , KeyCode.S, KeyCode.A, KeyCode.D };
 
     private void Start()
     {
@@ -66,23 +70,24 @@ public class PlayerBehevior : MonoBehaviour
         {
             _isOnLadder = true;
             _rb.useGravity = false;
-            _playerHand = GameManager.Instance.PlayerHand.transform.GetChild(0).gameObject;
+            _playerHand = GameManager.Instance.PlayerHand;
             if (_playerHand.transform.childCount > 0)
             {
                 _playerHand.SetActive(false);
             }
-            
         }
         else if (collision.gameObject.tag == "LadderFloor" && _isOnLadder)
         {
             _isOnLadder = false;
-            _playerHand = GameManager.Instance.PlayerHand.transform.GetChild(0).gameObject;
+            _rb.useGravity = true;
+            _playerHand = GameManager.Instance.PlayerHand;
             if (_playerHand.transform.childCount > 0)
             {
                 _playerHand.SetActive(true);
             }
         }
         _isJumping = false;
+        _hasCollided = true;
     }
 
     private void OnCollisionExit(Collision collision)
@@ -90,18 +95,20 @@ public class PlayerBehevior : MonoBehaviour
         if (collision.gameObject.tag == "Spine")
         {
             _rb.drag = 2f;
+            _rb.mass = 1f;
             _isOnSpine = false;
         } 
         else if (collision.gameObject.tag == "Ladder")
         {
             _isOnLadder = false;
             _rb.useGravity = true;
-            _playerHand = GameManager.Instance.PlayerHand.transform.GetChild(0).gameObject;
+            _playerHand = GameManager.Instance.PlayerHand;
             if (_playerHand.transform.childCount > 0)
             {
                 _playerHand.SetActive(true);
             }
         }
+        _hasCollided = false;
     }
 
     private void HorizontalMoves()
@@ -141,10 +148,17 @@ public class PlayerBehevior : MonoBehaviour
         
         if (_isOnSpine && _rb.velocity.magnitude < 10)
         {
-            // print(_rb.velocity.magnitude);
-            // _rb.drag = 205f;
-            // _rb.drag = 4f;
-            speed += (50 * Time.deltaTime); // 10500
+            if (AllKeysUp())
+            {
+                _rb.constraints = RigidbodyConstraints.FreezePosition;
+                _rb.freezeRotation = true;
+            }
+            else
+            {
+                _rb.constraints = RigidbodyConstraints.None;
+                _rb.freezeRotation = true;
+                speed += (500 * Time.deltaTime);
+            }
         }
         
         if (Input.GetKey(KeyCode.D)) // droite
@@ -204,5 +218,19 @@ public class PlayerBehevior : MonoBehaviour
     {
         float verticalInput = Input.GetAxis("Vertical"); // mouvement vertical
         transform.Translate(Vector3.up * verticalInput * climbSpeed * Time.deltaTime);
+    }
+
+    private bool AllKeysUp()
+    {
+        bool noKeyPressed = true;
+        foreach (KeyCode key in _keysINeed)
+        {
+            if (Input.GetKey(key))
+            {
+                noKeyPressed = false;
+                break;
+            }
+        }
+        return noKeyPressed;
     }
 }
