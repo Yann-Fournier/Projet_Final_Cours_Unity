@@ -7,12 +7,18 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     public GameObject Player;
-    public GameObject PlayerHand;
     
+    public GameObject PlayerHand;
+    public bool IsAttaking;
+
+    public bool PlayerIsDead;
+    public Vector3 RespawnPoint;
+    public int DeathCountDown;
     private void Start()
     {
         Cursor.visible = false; // Affiche le curseur de la souris
         Cursor.lockState = CursorLockMode.Locked; // Locke la souris au milieu de l'écran
+        RespawnPoint = Player.transform.position;
         if (Instance == null)
         {
             Instance = this;

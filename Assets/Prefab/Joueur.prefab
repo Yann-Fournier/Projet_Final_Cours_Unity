@@ -537,8 +537,9 @@ MonoBehaviour:
   sprintSpeed: 220
   crouchSpeed: 30
   jumpForce: 250
+  climbSpeed: 3
   mainCamera: {fileID: 5173787092050069173}
-  CharacterAnimator: {fileID: 2364097836873808860}
+  characterAnimator: {fileID: 2364097836873808860}
 --- !u!1 &5230516544419214441
 GameObject:
   m_ObjectHideFlags: 3
@@ -960,8 +961,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7478894868814084212}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.22296068, y: -0.004676074, z: 0.0010695234, w: 0.97481567}
-  m_LocalPosition: {x: 0.07236746, y: 4.5, z: -5.999571}
+  m_LocalRotation: {x: 0.15199624, y: 0.71267945, z: -0.16284995, w: 0.66518044}
+  m_LocalPosition: {x: -187.36436, y: 1.0920296, z: 157.02324}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

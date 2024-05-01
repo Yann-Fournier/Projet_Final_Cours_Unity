@@ -15,7 +15,10 @@ public class PlayerBehevior : MonoBehaviour
     [SerializeField] float climbSpeed;
     
     [SerializeField] Transform mainCamera; // Référence à la Transforme de la caméra principale
-    [SerializeField] Animator CharacterAnimator;
+    [SerializeField] Animator characterAnimator;
+    
+    [SerializeField] GameObject deadCanvas;
+    [SerializeField] GameObject numbers;
     
     private Rigidbody _rb;
     private Transform _t;
@@ -28,8 +31,6 @@ public class PlayerBehevior : MonoBehaviour
     private bool _isOnLadder;
     private bool _isOnSpine;
     private bool _stopOnSpine;
-    private bool _isAttaking;
-    private bool _hasCollided;
     
     private KeyCode[] _keysINeed = { KeyCode.W , KeyCode.S, KeyCode.A, KeyCode.D };
 
@@ -43,21 +44,39 @@ public class PlayerBehevior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_isOnLadder)
+        if (GameManager.Instance.PlayerIsDead)
         {
-            VerticalMoves();
-        }
+            deadCanvas.SetActive(true);
+            if (GameManager.Instance.DeathCountDown <= 0)
+            {
+                _t.SetPositionAndRotation(GameManager.Instance.RespawnPoint, new Quaternion(0, 0, 0, 0));
+                GameManager.Instance.PlayerIsDead = false;
+                GameManager.Instance.DeathCountDown = 2000;
+            }
+            else
+            {
+                GameManager.Instance.DeathCountDown -= 1;
+            }
+        } 
         else
         {
-            HorizontalMoves();
-        }
+            deadCanvas.SetActive(false);
+            if (_isOnLadder)
+            {
+                VerticalMoves();
+            }
+            else
+            {
+                HorizontalMoves();
+            }
         
-        // Set des variables d'Animations
-        CharacterAnimator.SetFloat("Speed", _rb.velocity.magnitude);
-        CharacterAnimator.SetBool("IsJumping", _isJumping);
-        CharacterAnimator.SetBool("IsCrouching", _isCrouch);
-        CharacterAnimator.SetBool("OnLadder", _isOnLadder);
-        CharacterAnimator.SetBool("IsAttacking", _isAttaking);
+            // Set des variables d'Animations
+            characterAnimator.SetFloat("Speed", _rb.velocity.magnitude);
+            characterAnimator.SetBool("IsJumping", _isJumping);
+            characterAnimator.SetBool("IsCrouching", _isCrouch);
+            characterAnimator.SetBool("OnLadder", _isOnLadder);
+            characterAnimator.SetBool("IsAttacking", GameManager.Instance.IsAttaking);
+        }
     }
     
     private void OnCollisionEnter(Collision collision)
@@ -87,7 +106,6 @@ public class PlayerBehevior : MonoBehaviour
             }
         }
         _isJumping = false;
-        _hasCollided = true;
     }
 
     private void OnCollisionExit(Collision collision)
@@ -108,7 +126,6 @@ public class PlayerBehevior : MonoBehaviour
                 _playerHand.SetActive(true);
             }
         }
-        _hasCollided = false;
     }
 
     private void HorizontalMoves()
@@ -203,14 +220,14 @@ public class PlayerBehevior : MonoBehaviour
             _isJumping = true;
         }
         
-        if (Input.GetKey(KeyCode.Mouse0) && GameManager.Instance.PlayerHand.transform.childCount > 0) // Saut
+        if ((Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKey(KeyCode.Mouse0))&& GameManager.Instance.PlayerHand.transform.childCount > 0) // Saut
         {
             _rb.velocity = new Vector3(0, 0, 0);
-            _isAttaking = true;
+            GameManager.Instance.IsAttaking = true;
         }
         else
         {
-            _isAttaking = false;
+            GameManager.Instance.IsAttaking = false;
         }
     }
 

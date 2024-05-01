@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -9,13 +10,13 @@ public class OuvrirCoffre : MonoBehaviour
 {
     [SerializeField] public GameObject OpenCanvas;
     [SerializeField] public GameObject PrendreCanvas;
+    [SerializeField] public GameObject ReposerCanvas;
     [SerializeField] public Animator OpenCoffre;
     [SerializeField] public GameObject Weapon;
         
     private bool _isInTrigger;
     private bool _isOpen;
     private bool _hasWeapon;
-    private GameObject _weapon;
     private GameObject _playerHand;
     private GameObject _weaponInChess;
     
@@ -25,8 +26,8 @@ public class OuvrirCoffre : MonoBehaviour
         Weapon.SetActive(false);
         PrendreCanvas.SetActive(false);
         OpenCanvas.SetActive(false);
-        _weapon = Weapon;
-        _weaponInChess = _weapon.transform.GetChild(0).gameObject;
+        ReposerCanvas.SetActive(false);
+        _weaponInChess = Weapon.transform.GetChild(0).gameObject;
     }
 
     // Update is called once per frame
@@ -45,15 +46,23 @@ public class OuvrirCoffre : MonoBehaviour
         } 
         else if (_isOpen && _isInTrigger)
         {
-            if (Input.GetKeyUp(KeyCode.E) && _weapon.transform.childCount > 0)
+            if (Input.GetKeyUp(KeyCode.E))
             {
-                if (_hasWeapon)
+                if (_hasWeapon && Weapon.transform.childCount > 0)
                 {
                     SwitchWeapon();
                 }
-                else
+                else if (!_hasWeapon && Weapon.transform.childCount > 0)
                 {
                     TakeWeapon();
+                }
+                else if (_hasWeapon && Weapon.transform.childCount == 0)
+                {
+                    PrendreCanvas.SetActive(false);
+                    ReposeWeapon();
+                    _hasWeapon = false;
+                    ReposerCanvas.SetActive(false);
+                    PrendreCanvas.SetActive(true);
                 }
             }
         }
@@ -75,10 +84,16 @@ public class OuvrirCoffre : MonoBehaviour
         if (!_isOpen)
         {
             OpenCanvas.SetActive(true);
-        } 
-        else if (_isOpen && _weapon.transform.childCount > 0)
+        }
+        else if (_isOpen && Weapon.transform.childCount > 0)
         {
+            ReposerCanvas.SetActive(false);
             PrendreCanvas.SetActive(true);
+        }
+        else if (_hasWeapon && Weapon.transform.childCount == 0 && _isOpen)
+        {
+            PrendreCanvas.SetActive(false);
+            ReposerCanvas.SetActive(true);
         }
         _isInTrigger = true;
     }
@@ -87,6 +102,7 @@ public class OuvrirCoffre : MonoBehaviour
     {
         OpenCanvas.SetActive(false);
         PrendreCanvas.SetActive(false);
+        ReposerCanvas.SetActive(false);
         _isInTrigger = false;
     }
 
@@ -98,6 +114,7 @@ public class OuvrirCoffre : MonoBehaviour
         // On l'ajoute à la main du joueur
         newChild.transform.name = ChangeString(newChild.transform.name); // On change son nom sinon ca fait des pb.
         newChild.transform.parent = GameManager.Instance.PlayerHand.transform;
+        _weaponInChess = null;
         // On met à jour sa transform
         newChild.transform.localPosition = Vector3.zero;
         newChild.transform.localRotation = Quaternion.identity;
@@ -122,7 +139,22 @@ public class OuvrirCoffre : MonoBehaviour
         newChild.transform.localScale = Vector3.one;
         // On ajoute l'ancienne arme au coffre
         oldChild.transform.name = ChangeString(oldChild.transform.name);
-        oldChild.transform.parent = _weapon.transform;
+        oldChild.transform.parent = Weapon.transform;
+        _weaponInChess = oldChild;
+        // On met à jour sa transform
+        oldChild.transform.localPosition = new Vector3(-0.867f, 0.097f, 0f);
+        oldChild.transform.localRotation = new Quaternion(-101.168f, -90f, 0f, 0f);
+        oldChild.transform.localScale = Vector3.one;
+    }
+    
+    private void ReposeWeapon()
+    {
+        // On récupère l'arme de la main du joueur
+        GameObject oldChild = Instantiate(GameManager.Instance.PlayerHand.transform.GetChild(0).gameObject);
+        Destroy(GameManager.Instance.PlayerHand.transform.GetChild(0).gameObject);
+        // On ajoute l'arme au coffre
+        oldChild.transform.name = ChangeString(oldChild.transform.name);
+        oldChild.transform.parent = Weapon.transform;
         _weaponInChess = oldChild;
         // On met à jour sa transform
         oldChild.transform.localPosition = new Vector3(-0.867f, 0.097f, 0f);
@@ -130,7 +162,7 @@ public class OuvrirCoffre : MonoBehaviour
         oldChild.transform.localScale = Vector3.one;
     }
 
-    private string ChangeString(string str)
+    private string ChangeString(string str) // On enlève les 7 dernier char pour éviter que il y est des "(Clone)" dans le nom
     {
         int newLength = str.Length - 7; // 7 est la longeur de: (Clone).
         string newString = str.Substring(0, newLength);
