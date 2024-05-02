@@ -31,6 +31,8 @@ public class PlayerBehevior : MonoBehaviour
     private bool _isOnLadder;
     private bool _isOnSpine;
     private bool _stopOnSpine;
+    private bool _uppercut;
+    private bool _hasWeapon;
     
     private KeyCode[] _keysINeed = { KeyCode.W , KeyCode.S, KeyCode.A, KeyCode.D };
 
@@ -47,6 +49,7 @@ public class PlayerBehevior : MonoBehaviour
         if (GameManager.Instance.PlayerIsDead)
         {
             deadCanvas.SetActive(true);
+            characterAnimator.SetFloat("Speed", 0);
             if (GameManager.Instance.DeathCountDown <= 0)
             {
                 _t.SetPositionAndRotation(GameManager.Instance.RespawnPoint, new Quaternion(0, 0, 0, 0));
@@ -76,7 +79,10 @@ public class PlayerBehevior : MonoBehaviour
             characterAnimator.SetBool("IsCrouching", _isCrouch);
             characterAnimator.SetBool("OnLadder", _isOnLadder);
             characterAnimator.SetBool("IsAttacking", GameManager.Instance.IsAttaking);
+            characterAnimator.SetBool("HasWeapon", _hasWeapon);
+            characterAnimator.SetBool("Uppercut", _uppercut);
         }
+        characterAnimator.SetBool("IsDead", GameManager.Instance.PlayerIsDead);
     }
     
     private void OnCollisionEnter(Collision collision)
@@ -220,10 +226,27 @@ public class PlayerBehevior : MonoBehaviour
             _isJumping = true;
         }
         
-        if ((Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKey(KeyCode.Mouse0))&& GameManager.Instance.PlayerHand.transform.childCount > 0) // Saut
+        if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKey(KeyCode.Mouse0)) // Saut
         {
             _rb.velocity = new Vector3(0, 0, 0);
             GameManager.Instance.IsAttaking = true;
+            if (GameManager.Instance.PlayerHand.transform.childCount == 0 && GameManager.Instance.IsAttaking)
+            {
+                _hasWeapon = false;
+                if (_uppercut)
+                {
+                    _uppercut = false;
+                }
+                else if (!_uppercut)
+                {
+                    _uppercut = true;
+                }
+            } 
+            else if (GameManager.Instance.PlayerHand.transform.childCount > 0 && GameManager.Instance.IsAttaking)
+            {
+                _hasWeapon = true;
+            }
+            
         }
         else
         {
