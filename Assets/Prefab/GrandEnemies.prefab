@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1616153012286561419}
-  - component: {fileID: 486861862270274362}
   m_Layer: 0
   m_Name: GrandEnemies
   m_TagString: Untagged
@@ -33,20 +32,6 @@ Transform:
   - {fileID: 1277755437604078865}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &486861862270274362
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6478221646990790923}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b008520dac027c4fb4063285bfa5dbf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Speed: 500
-  GoblinAnimator: {fileID: 8872661449551982134}
 --- !u!1 &8385368497197504936
 GameObject:
   m_ObjectHideFlags: 0
@@ -264,15 +249,23 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 173802, guid: 388fa61abd880a549864058f895c8045,
         type: 3}
       insertIndex: 1
-      addedObject: {fileID: 4615282919003523748}
+      addedObject: {fileID: 2468242204745436967}
     - targetCorrespondingSourceObject: {fileID: 173802, guid: 388fa61abd880a549864058f895c8045,
         type: 3}
       insertIndex: 2
-      addedObject: {fileID: 2355254065600811621}
+      addedObject: {fileID: 4615282919003523748}
     - targetCorrespondingSourceObject: {fileID: 173802, guid: 388fa61abd880a549864058f895c8045,
         type: 3}
       insertIndex: 3
+      addedObject: {fileID: 2355254065600811621}
+    - targetCorrespondingSourceObject: {fileID: 173802, guid: 388fa61abd880a549864058f895c8045,
+        type: 3}
+      insertIndex: 4
       addedObject: {fileID: 5524652406752565071}
+    - targetCorrespondingSourceObject: {fileID: 173802, guid: 388fa61abd880a549864058f895c8045,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2160613860997942876}
     - targetCorrespondingSourceObject: {fileID: 178506, guid: 388fa61abd880a549864058f895c8045,
         type: 3}
       insertIndex: -1
@@ -312,6 +305,28 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 8872661449542482290}
   m_PrefabAsset: {fileID: 0}
+--- !u!195 &2468242204745436967
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8872661449542639512}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2.5
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!54 &4615282919003523748
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -383,6 +398,19 @@ CapsuleCollider:
   m_Height: 2.5
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &2160613860997942876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8872661449542639512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b008520dac027c4fb4063285bfa5dbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GoblinAnimator: {fileID: 8872661449551982134}
 --- !u!4 &8872661449542956252 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 478638, guid: 388fa61abd880a549864058f895c8045,

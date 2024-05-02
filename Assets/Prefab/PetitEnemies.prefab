@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8100659788371926056}
-  - component: {fileID: 6875944206152524085}
   m_Layer: 0
   m_Name: PetitEnemies
   m_TagString: Untagged
@@ -33,20 +32,6 @@ Transform:
   - {fileID: 6390051900608700309}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6875944206152524085
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 488603316279522757}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b008520dac027c4fb4063285bfa5dbf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Speed: 300
-  GoblinAnimator: {fileID: 3764416997244205753}
 --- !u!1 &8647451035888126913
 GameObject:
   m_ObjectHideFlags: 0
@@ -165,15 +150,23 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 124030, guid: d48e97c38730e6d4a8a87d44d568bc50,
         type: 3}
       insertIndex: 1
-      addedObject: {fileID: 7613254437170499916}
+      addedObject: {fileID: 2113191809481528436}
     - targetCorrespondingSourceObject: {fileID: 124030, guid: d48e97c38730e6d4a8a87d44d568bc50,
         type: 3}
       insertIndex: 2
-      addedObject: {fileID: 369785568681591535}
+      addedObject: {fileID: 7613254437170499916}
     - targetCorrespondingSourceObject: {fileID: 124030, guid: d48e97c38730e6d4a8a87d44d568bc50,
         type: 3}
       insertIndex: 3
+      addedObject: {fileID: 369785568681591535}
+    - targetCorrespondingSourceObject: {fileID: 124030, guid: d48e97c38730e6d4a8a87d44d568bc50,
+        type: 3}
+      insertIndex: 4
       addedObject: {fileID: 1912704732174199247}
+    - targetCorrespondingSourceObject: {fileID: 124030, guid: d48e97c38730e6d4a8a87d44d568bc50,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7419993232505289801}
   m_SourcePrefab: {fileID: 100100000, guid: d48e97c38730e6d4a8a87d44d568bc50, type: 3}
 --- !u!95 &3764416997244205753 stripped
 Animator:
@@ -199,6 +192,28 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 3764416997253688079}
   m_PrefabAsset: {fileID: 0}
+--- !u!195 &2113191809481528436
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3764416997253599089}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!54 &7613254437170499916
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -270,6 +285,19 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &7419993232505289801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3764416997253599089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b008520dac027c4fb4063285bfa5dbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GoblinAnimator: {fileID: 3764416997244205753}
 --- !u!1001 &8728970825290560975
 PrefabInstance:
   m_ObjectHideFlags: 0
