@@ -8,6 +8,7 @@ TagManager:
   - Ladder
   - LadderFloor
   - Enemies
+  - Weapon
   layers:
   - Default
   - TransparentFX

@@ -18,7 +18,6 @@ public class PlayerBehevior : MonoBehaviour
     [SerializeField] Animator characterAnimator;
     
     [SerializeField] GameObject deadCanvas;
-    [SerializeField] GameObject numbers;
     
     private Rigidbody _rb;
     private Transform _t;
