@@ -302,6 +302,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GoblinAnimator: {fileID: 3764416997244205753}
+  WeaponCollider: {fileID: 8773144784330273137}
 --- !u!1001 &8728970825290560975
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -369,7 +370,7 @@ PrefabInstance:
     - target: {fileID: 64158722655683774, guid: 92cd70a481699ac4b93380dc1184f864,
         type: 3}
       propertyPath: m_IsTrigger
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -379,6 +380,12 @@ PrefabInstance:
 --- !u!4 &8728970825290964049 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 420254, guid: 92cd70a481699ac4b93380dc1184f864,
+    type: 3}
+  m_PrefabInstance: {fileID: 8728970825290560975}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &8773144784330273137 stripped
+MeshCollider:
+  m_CorrespondingSourceObject: {fileID: 64158722655683774, guid: 92cd70a481699ac4b93380dc1184f864,
     type: 3}
   m_PrefabInstance: {fileID: 8728970825290560975}
   m_PrefabAsset: {fileID: 0}
