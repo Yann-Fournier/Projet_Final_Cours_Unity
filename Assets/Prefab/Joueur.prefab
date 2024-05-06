@@ -1127,8 +1127,8 @@ GameObject:
   m_Component:
   - component: {fileID: 691645830609644416}
   - component: {fileID: 2780235722629912576}
-  - component: {fileID: 1751462233032676797}
   - component: {fileID: 70207774833475742}
+  - component: {fileID: 8125675166301217413}
   m_Layer: 0
   m_Name: Hand_R
   m_TagString: Player
@@ -1177,18 +1177,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
---- !u!114 &1751462233032676797
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 691645830609448992}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22e79a1378a0fe74fb03198e5e020c71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &70207774833475742
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1210,6 +1198,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 30, y: 30, z: 30}
   m_Center: {x: 10, y: 0, z: 0}
+--- !u!114 &8125675166301217413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 691645830609448992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f49140adf2001af41b9d05f7b16d4043, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PrefabFire: {fileID: 0}
 --- !u!1 &691645830609450010
 GameObject:
   m_ObjectHideFlags: 0
@@ -1910,8 +1911,8 @@ GameObject:
   m_Component:
   - component: {fileID: 691645830609692368}
   - component: {fileID: 8703510758682672813}
-  - component: {fileID: 292988041991150107}
   - component: {fileID: 6201444000520949580}
+  - component: {fileID: 3305250673421264109}
   m_Layer: 0
   m_Name: Hand_L
   m_TagString: Player
@@ -1959,18 +1960,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
---- !u!114 &292988041991150107
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 691645830609485892}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22e79a1378a0fe74fb03198e5e020c71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &6201444000520949580
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1992,6 +1981,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 30, y: 30, z: 30}
   m_Center: {x: -10, y: 0, z: 0}
+--- !u!114 &3305250673421264109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 691645830609485892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f49140adf2001af41b9d05f7b16d4043, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PrefabFire: {fileID: 0}
 --- !u!1 &691645830609486858
 GameObject:
   m_ObjectHideFlags: 0

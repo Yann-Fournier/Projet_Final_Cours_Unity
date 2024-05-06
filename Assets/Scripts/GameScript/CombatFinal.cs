@@ -32,7 +32,7 @@ public class CombatFinal : MonoBehaviour
     void Update()
     {
         // print(_stateCombat);
-        print(GameManager.Instance.NumberMonsterKill);
+        // print(GameManager.Instance.NumberMonsterKill);
         if (_stateCombat == 1)
         {
             

@@ -228,8 +228,7 @@ public class PlayerBehevior : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKey(KeyCode.Mouse0)) // attaque
         {
             _rb.velocity = new Vector3(0, 0, 0);
-            // GameManager.Instance.IsAttaking = true;
-            StartCoroutine(SetTemporaryValue_IsAttacking());
+            GameManager.Instance.IsAttaking = true;
             if (GameManager.Instance.PlayerHand.transform.childCount == 0 && GameManager.Instance.IsAttaking)
             {
                 _hasWeapon = false;
@@ -241,10 +240,12 @@ public class PlayerBehevior : MonoBehaviour
                 {
                     _uppercut = true;
                 }
+                StartCoroutine(SetTemporaryValue_IsAttacking(1));
             } 
             else if (GameManager.Instance.PlayerHand.transform.childCount > 0 && GameManager.Instance.IsAttaking)
             {
                 _hasWeapon = true;
+                StartCoroutine(SetTemporaryValue_IsAttacking(1.5f));
             }
             
         }
@@ -270,10 +271,10 @@ public class PlayerBehevior : MonoBehaviour
         return noKeyPressed;
     }
     
-    IEnumerator SetTemporaryValue_IsAttacking()
+    IEnumerator SetTemporaryValue_IsAttacking(float time)
     {
         GameManager.Instance.IsAttaking = true;
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(time);
         GameManager.Instance.IsAttaking = false;
     }
 }

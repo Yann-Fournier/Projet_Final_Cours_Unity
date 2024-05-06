@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6456541697318859077}
   - component: {fileID: 3823539450516548368}
   - component: {fileID: -2697393309598974079}
+  - component: {fileID: 4082735509586018098}
   m_Layer: 0
   m_Name: SM_Wep_Crystal_DoubleSword_01
   m_TagString: Weapon
@@ -120,3 +121,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PrefabFire: {fileID: 1284412465784686, guid: b99ce17d2a62f164698110549e49b762, type: 3}
+--- !u!65 &4082735509586018098
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4124217919449835799}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Size: {x: 0.08839799, y: 1.7213626, z: 0.31257772}
+  m_Center: {x: -1.09175085e-14, y: 0.6363475, z: -0.0000005066395}

@@ -16,7 +16,8 @@ public class GoblinBehevior : MonoBehaviour
     private NavMeshAgent _n;
     private Vector3 _startPosition;
     private bool _canAttack;
-    // private float _truc = 5000;
+    private bool _isDead;
+    private bool _navMeshEnable = true;
     
     void Start()
     {
@@ -31,7 +32,7 @@ public class GoblinBehevior : MonoBehaviour
     {
         Vector3 distanceVector = GameManager.Instance.Player.GetComponent<Transform>().position - _t.position;
         float distance = distanceVector.magnitude;
-        if (distance < 1.5)
+        if (distance < 1.5 && _navMeshEnable)
         {
             _canAttack = true;
         }
@@ -42,11 +43,12 @@ public class GoblinBehevior : MonoBehaviour
         
         GoblinAnimator.SetFloat("Speed", _rb.velocity.magnitude * 10);
         GoblinAnimator.SetBool("CanAttack", _canAttack);
+        GoblinAnimator.SetBool("IsDead", _isDead);
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "Player" && _navMeshEnable)
         {
             _n.SetDestination(GameManager.Instance.Player.GetComponent<Transform>().position);
         }
@@ -54,9 +56,37 @@ public class GoblinBehevior : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "Player" && _navMeshEnable)
         {
             _n.SetDestination(_startPosition);
         }
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if ((other.gameObject.tag == "Player" || other.gameObject.tag == "Weapon") && GameManager.Instance.IsAttaking)
+        {
+            _isDead = true;
+            GameManager.Instance.NumberMonsterKill++;
+            _rb.constraints = RigidbodyConstraints.FreezePosition;
+            this.GetComponent<SphereCollider>().enabled = false;
+            this.GetComponent<CapsuleCollider>().enabled = false;
+            this.GetComponent<NavMeshAgent>().enabled = false;
+            _navMeshEnable = false;
+            Destroy(this.gameObject, 3);
+        } 
+    }
+    private void OnCollisionExit(Collision other)
+    {
+        if ((other.gameObject.tag == "Player" || other.gameObject.tag == "Weapon") && GameManager.Instance.IsAttaking)
+        {
+            _isDead = true;
+            _rb.constraints = RigidbodyConstraints.FreezePosition;
+            this.GetComponent<SphereCollider>().enabled = false;
+            this.GetComponent<CapsuleCollider>().enabled = false;
+            this.GetComponent<NavMeshAgent>().enabled = false;
+            _navMeshEnable = false;
+            Destroy(this.gameObject, 3);
+        } 
     }
 }
