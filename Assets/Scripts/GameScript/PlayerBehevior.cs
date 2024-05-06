@@ -225,10 +225,11 @@ public class PlayerBehevior : MonoBehaviour
             _isJumping = true;
         }
         
-        if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKey(KeyCode.Mouse0)) // Saut
+        if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKey(KeyCode.Mouse0)) // attaque
         {
             _rb.velocity = new Vector3(0, 0, 0);
-            GameManager.Instance.IsAttaking = true;
+            // GameManager.Instance.IsAttaking = true;
+            StartCoroutine(SetTemporaryValue_IsAttacking());
             if (GameManager.Instance.PlayerHand.transform.childCount == 0 && GameManager.Instance.IsAttaking)
             {
                 _hasWeapon = false;
@@ -246,10 +247,6 @@ public class PlayerBehevior : MonoBehaviour
                 _hasWeapon = true;
             }
             
-        }
-        else
-        {
-            GameManager.Instance.IsAttaking = false;
         }
     }
 
@@ -271,5 +268,12 @@ public class PlayerBehevior : MonoBehaviour
             }
         }
         return noKeyPressed;
+    }
+    
+    IEnumerator SetTemporaryValue_IsAttacking()
+    {
+        GameManager.Instance.IsAttaking = true;
+        yield return new WaitForSeconds(2);
+        GameManager.Instance.IsAttaking = false;
     }
 }

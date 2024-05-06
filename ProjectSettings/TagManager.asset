@@ -9,6 +9,8 @@ TagManager:
   - LadderFloor
   - Enemies
   - Weapon
+  - Baril
+  - test
   layers:
   - Default
   - TransparentFX

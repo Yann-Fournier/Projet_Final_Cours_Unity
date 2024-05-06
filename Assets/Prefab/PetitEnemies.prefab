@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8100659788371926056}
   m_Layer: 0
   m_Name: PetitEnemies
-  m_TagString: Untagged
+  m_TagString: Enemies
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -75,6 +75,10 @@ PrefabInstance:
     - target: {fileID: 124030, guid: d48e97c38730e6d4a8a87d44d568bc50, type: 3}
       propertyPath: m_Name
       value: Character_Goblin_Female
+      objectReference: {fileID: 0}
+    - target: {fileID: 124030, guid: d48e97c38730e6d4a8a87d44d568bc50, type: 3}
+      propertyPath: m_TagString
+      value: Enemies
       objectReference: {fileID: 0}
     - target: {fileID: 474098, guid: d48e97c38730e6d4a8a87d44d568bc50, type: 3}
       propertyPath: m_LocalPosition.x
@@ -302,7 +306,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GoblinAnimator: {fileID: 3764416997244205753}
-  WeaponCollider: {fileID: 8773144784330273137}
 --- !u!1001 &8728970825290560975
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -314,6 +317,10 @@ PrefabInstance:
     - target: {fileID: 148790, guid: 92cd70a481699ac4b93380dc1184f864, type: 3}
       propertyPath: m_Name
       value: SM_Wep_Straightsword_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 148790, guid: 92cd70a481699ac4b93380dc1184f864, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 420254, guid: 92cd70a481699ac4b93380dc1184f864, type: 3}
       propertyPath: m_LocalScale.x
@@ -380,12 +387,6 @@ PrefabInstance:
 --- !u!4 &8728970825290964049 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 420254, guid: 92cd70a481699ac4b93380dc1184f864,
-    type: 3}
-  m_PrefabInstance: {fileID: 8728970825290560975}
-  m_PrefabAsset: {fileID: 0}
---- !u!64 &8773144784330273137 stripped
-MeshCollider:
-  m_CorrespondingSourceObject: {fileID: 64158722655683774, guid: 92cd70a481699ac4b93380dc1184f864,
     type: 3}
   m_PrefabInstance: {fileID: 8728970825290560975}
   m_PrefabAsset: {fileID: 0}

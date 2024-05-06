@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
     public bool PlayerIsDead;
     public Vector3 RespawnPoint;
     public int DeathCountDown;
+
+    public int NumberMonsterKill;
     private void Start()
     {
         Cursor.visible = false; // Affiche le curseur de la souris
