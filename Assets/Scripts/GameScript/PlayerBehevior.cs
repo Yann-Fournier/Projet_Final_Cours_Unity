@@ -32,6 +32,8 @@ public class PlayerBehevior : MonoBehaviour
     private bool _stopOnSpine;
     private bool _uppercut;
     private bool _hasWeapon;
+    private bool _canRespawn;
+    private bool _coRoutinehasStart;
     
     private KeyCode[] _keysINeed = { KeyCode.W , KeyCode.S, KeyCode.A, KeyCode.D };
 
@@ -40,6 +42,7 @@ public class PlayerBehevior : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
         _t = GetComponent<Transform>();
         _c = GetComponent<CapsuleCollider>();
+        deadCanvas.SetActive(false);
     }
 
     // Update is called once per frame
@@ -47,11 +50,23 @@ public class PlayerBehevior : MonoBehaviour
     {
         if (GameManager.Instance.PlayerIsDead)
         {
-            StartCoroutine(SetTemporaryValue_IsDead(5));
+            if (!_coRoutinehasStart)
+            {
+                _coRoutinehasStart = true;
+                StartCoroutine(SetTemporaryValue_IsDead(4));
+            }
+            if (_canRespawn)
+            {
+                characterAnimator.SetFloat("Speed", 0f);
+                GameManager.Instance.PlayerIsDead = false;
+                deadCanvas.SetActive(false);
+                _t.SetPositionAndRotation(GameManager.Instance.RespawnPoint, new Quaternion(0, 0, 0, 0));
+                _canRespawn = false;
+                _coRoutinehasStart = false;
+            }
         } 
         else
         {
-            deadCanvas.SetActive(false);
             if (_isOnLadder)
             {
                 VerticalMoves();
@@ -287,7 +302,6 @@ public class PlayerBehevior : MonoBehaviour
     {
         deadCanvas.SetActive(true);
         yield return new WaitForSeconds(time);
-        _t.SetPositionAndRotation(GameManager.Instance.RespawnPoint, new Quaternion(0, 0, 0, 0));
-        GameManager.Instance.PlayerIsDead = false;
+        _canRespawn = true;
     }
 }

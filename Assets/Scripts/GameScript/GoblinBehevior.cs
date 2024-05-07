@@ -36,7 +36,7 @@ public class GoblinBehevior : MonoBehaviour
         {
             GoblinWeapon.gameObject.tag = "Untagged";
         }
-        print(GoblinWeapon.gameObject.tag);
+        // print(GoblinWeapon.gameObject.tag);
         Vector3 distanceVector = GameManager.Instance.Player.GetComponent<Transform>().position - _t.position;
         float distance = distanceVector.magnitude;
         if (distance < 1.5 && _navMeshEnable)
