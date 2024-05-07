@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     public Vector3 RespawnPoint;
 
     public int NumberMonsterKill;
+
+    public bool RestartCombat;
     private void Start()
     {
         Cursor.visible = false; // Affiche le curseur de la souris

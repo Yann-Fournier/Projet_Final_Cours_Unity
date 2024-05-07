@@ -31,6 +31,16 @@ public class CombatFinal : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Reset le combat si il est mort pendant
+        if (GameManager.Instance.PlayerIsDead && GameManager.Instance.RespawnPoint == new Vector3(35.42328f, 13.018f, 38.32f))
+        {
+            StartCoroutine(RestartCombat(2));
+            
+            _stateCombat = 1;
+            _phase1Instanciate = false;
+            _phase2Instanciate = false;
+            _phase3Instanciate = false;
+        }
         if (_stateCombat == 1)
         {
             
@@ -111,5 +121,45 @@ public class CombatFinal : MonoBehaviour
         yield return new WaitForSeconds(time);
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex; // Obtenir l'index de la scène actuelle
         SceneManager.LoadScene(currentSceneIndex); // Recharger la scène par index
+    }
+    
+    private void ReinstanciatePetitGroupeEnemies(GameObject groupe)
+    {
+        // Groupe -> Enemie ->Emplacement départ -> Goblin
+        groupe.transform.GetChild(0).transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(true);
+        groupe.transform.GetChild(1).transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(true);
+        groupe.transform.GetChild(2).transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(true);
+    }
+    
+    private void ReinstanciateGrandGroupeEnemies(GameObject groupe)
+    {
+        // Groupe -> Enemie ->Emplacement départ -> Goblin
+        groupe.transform.GetChild(0).transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(true);
+        groupe.transform.GetChild(1).transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(true);
+        groupe.transform.GetChild(2).transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(true);
+        groupe.transform.GetChild(3).transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(true);
+        groupe.transform.GetChild(4).transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(true);
+        groupe.transform.GetChild(5).transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(true);
+    }
+    
+    IEnumerator RestartCombat(float time)
+    {
+        GameManager.Instance.RestartCombat = true;
+        ReinstanciatePetitGroupeEnemies(PetitGroupeEnemi1);
+        ReinstanciatePetitGroupeEnemies(PetitGroupeEnemi2);
+        ReinstanciateGrandGroupeEnemies(GrandGroupeEnemi1);
+        ReinstanciateGrandGroupeEnemies(GrandGroupeEnemi2);
+        ReinstanciatePetitGroupeEnemies(PetitGroupeEnemi3);
+        yield return new WaitForSeconds(time);
+        PetitGroupeEnemi1.SetActive(true);
+        PetitGroupeEnemi2.SetActive(true);
+        GrandGroupeEnemi1.SetActive(true);
+        GrandGroupeEnemi2.SetActive(true);
+        PetitGroupeEnemi3.SetActive(true);
+        yield return new WaitForSeconds(time);
+        GrandGroupeEnemi1.SetActive(false);
+        GrandGroupeEnemi2.SetActive(false);
+        PetitGroupeEnemi3.SetActive(false);
+        GameManager.Instance.RestartCombat = false;
     }
 }

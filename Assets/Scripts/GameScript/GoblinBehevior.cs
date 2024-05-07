@@ -34,9 +34,22 @@ public class GoblinBehevior : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.Instance.RestartCombat)
+        {
+            _isDead = false;
+            _canAttack = false;
+            GameManager.Instance.NumberMonsterKill = 0;
+            _rb.constraints = RigidbodyConstraints.None;
+            _sc.enabled = true;
+            _cc.enabled = true;
+            _n.enabled = true;
+            _navMeshEnable = true;
+        }
+        
         if (_isDead)
         {
             GoblinWeapon.gameObject.tag = "Untagged";
+            _canAttack = false;
         }
 
         // print(GoblinWeapon.gameObject.tag);
@@ -50,7 +63,7 @@ public class GoblinBehevior : MonoBehaviour
 
         if (!_isWaiting && _hasWait)
         {
-            StartCoroutine(SetTemporaryValue_EnemiesWeaponTag(2));
+            StartCoroutine(SetTemporaryValue_EnemiesWeaponTag(1.5f));
             _hasWait = false;
         }
 
@@ -95,7 +108,8 @@ public class GoblinBehevior : MonoBehaviour
             _cc.enabled = false;
             _n.enabled = false;
             _navMeshEnable = false;
-            Destroy(this.gameObject, 3);
+            // Destroy(this.gameObject, 3);
+            StartCoroutine(SetTemporaryValue_EnemiesDisapear(3));
         }
     }
 
@@ -110,9 +124,17 @@ public class GoblinBehevior : MonoBehaviour
             _cc.enabled = false;
             _n.enabled = false;
             _navMeshEnable = false;
-            Destroy(this.gameObject, 3);
+            // Destroy(this.gameObject, 3);
+            StartCoroutine(SetTemporaryValue_EnemiesDisapear(3));
         }
     }
+    
+    IEnumerator SetTemporaryValue_EnemiesDisapear(float time)
+    {
+        yield return new WaitForSeconds(time);
+        this.gameObject.SetActive(false);
+    }
+
 
     IEnumerator SetTemporaryValue_EnemiesWeaponTag(float time)
     {
