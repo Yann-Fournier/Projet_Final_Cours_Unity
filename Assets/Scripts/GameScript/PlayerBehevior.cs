@@ -47,18 +47,7 @@ public class PlayerBehevior : MonoBehaviour
     {
         if (GameManager.Instance.PlayerIsDead)
         {
-            deadCanvas.SetActive(true);
-            characterAnimator.SetFloat("Speed", 0);
-            if (GameManager.Instance.DeathCountDown <= 0)
-            {
-                _t.SetPositionAndRotation(GameManager.Instance.RespawnPoint, new Quaternion(0, 0, 0, 0));
-                GameManager.Instance.PlayerIsDead = false;
-                GameManager.Instance.DeathCountDown = 2000;
-            }
-            else
-            {
-                GameManager.Instance.DeathCountDown -= 1;
-            }
+            StartCoroutine(SetTemporaryValue_IsDead(5));
         } 
         else
         {
@@ -86,6 +75,10 @@ public class PlayerBehevior : MonoBehaviour
     
     private void OnCollisionEnter(Collision collision)
     {
+        if (collision.gameObject.tag == "EnemiesWeapon")
+        {
+            GameManager.Instance.PlayerIsDead= true;
+        }
         if (collision.gameObject.tag == "Spine")
         {
             _isOnSpine = true;
@@ -113,8 +106,20 @@ public class PlayerBehevior : MonoBehaviour
         _isJumping = false;
     }
 
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.tag == "EnemiesWeapon")
+        {
+            GameManager.Instance.PlayerIsDead = true;
+        }
+    }
+
     private void OnCollisionExit(Collision collision)
     {
+        if (collision.gameObject.tag == "EnemiesWeapon")
+        {
+            GameManager.Instance.PlayerIsDead= true;
+        }
         if (collision.gameObject.tag == "Spine")
         {
             _rb.drag = 2f;
@@ -276,5 +281,13 @@ public class PlayerBehevior : MonoBehaviour
         GameManager.Instance.IsAttaking = true;
         yield return new WaitForSeconds(time);
         GameManager.Instance.IsAttaking = false;
+    }
+    
+    IEnumerator SetTemporaryValue_IsDead(float time)
+    {
+        deadCanvas.SetActive(true);
+        yield return new WaitForSeconds(time);
+        _t.SetPositionAndRotation(GameManager.Instance.RespawnPoint, new Quaternion(0, 0, 0, 0));
+        GameManager.Instance.PlayerIsDead = false;
     }
 }

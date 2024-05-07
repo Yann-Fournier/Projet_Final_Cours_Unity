@@ -4,6 +4,4 @@ Ce projet a été réalisé à deux, Patchouf et moi-même dans le cadre d'un co
 
 # To do list:
 
-- Faire système de combat (faire les monstres)
-- labyrinthe de pic à réaliser
-- lampadaire pont, pics
+- Faire système de combat (monstres qui attaques)

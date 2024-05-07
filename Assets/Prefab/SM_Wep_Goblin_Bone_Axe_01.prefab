@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4180407535470247838}
   m_Layer: 0
   m_Name: SM_Wep_Goblin_Bone_Axe_01
-  m_TagString: EnemiesWeapon
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

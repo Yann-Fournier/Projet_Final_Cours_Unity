@@ -13,7 +13,6 @@ public class GameManager : MonoBehaviour
 
     public bool PlayerIsDead;
     public Vector3 RespawnPoint;
-    public int DeathCountDown;
 
     public int NumberMonsterKill;
     private void Start()
@@ -21,15 +20,8 @@ public class GameManager : MonoBehaviour
         Cursor.visible = false; // Affiche le curseur de la souris
         Cursor.lockState = CursorLockMode.Locked; // Locke la souris au milieu de l'écran
         RespawnPoint = Player.transform.position;
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
         
+        Instance = this;
         DontDestroyOnLoad(gameObject);
     }
 }
