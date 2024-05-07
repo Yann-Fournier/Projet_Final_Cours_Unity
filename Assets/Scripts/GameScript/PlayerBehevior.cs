@@ -152,6 +152,27 @@ public class PlayerBehevior : MonoBehaviour
             }
         }
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "EnemiesWeapon")
+        {
+            GameManager.Instance.PlayerIsDead = true;
+        }
+    }
+    // private void OnTriggerStay(Collider other)
+    // {
+    //     if (other.tag == "EnemiesWeapon")
+    //     {
+    //         GameManager.Instance.PlayerIsDead = true;
+    //     }
+    // }
+    // private void OnTriggerExit(Collider other)
+    // {
+    //     if (other.tag == "EnemiesWeapon")
+    //     {
+    //         GameManager.Instance.PlayerIsDead = true;
+    //     }
+    // }
 
     private void HorizontalMoves()
     {
