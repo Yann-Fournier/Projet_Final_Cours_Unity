@@ -11003,6 +11003,21 @@ PrefabInstance:
       propertyPath: m_fontColor32.rgba
       value: 4278255393
       objectReference: {fileID: 0}
+    - target: {fileID: 1950487344666527861, guid: 2c4f5657c43b46d4a91e804c9e9e0f6c,
+        type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1950487344666527861, guid: 2c4f5657c43b46d4a91e804c9e9e0f6c,
+        type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 1950487344666527861, guid: 2c4f5657c43b46d4a91e804c9e9e0f6c,
+        type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1080
+      objectReference: {fileID: 0}
     - target: {fileID: 5772715440082741642, guid: 2c4f5657c43b46d4a91e804c9e9e0f6c,
         type: 3}
       propertyPath: m_SizeDelta.x
@@ -19772,6 +19787,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1199849510419419158, guid: 16059cd2883439b4aa8f825f8975f5ee,
+        type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1199849510419419158, guid: 16059cd2883439b4aa8f825f8975f5ee,
+        type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 1199849510419419158, guid: 16059cd2883439b4aa8f825f8975f5ee,
+        type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1080
+      objectReference: {fileID: 0}
     - target: {fileID: 1540942392963738944, guid: 16059cd2883439b4aa8f825f8975f5ee,
         type: 3}
       propertyPath: m_Name
@@ -80255,6 +80285,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1950487344666527861, guid: 2c4f5657c43b46d4a91e804c9e9e0f6c,
+        type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1950487344666527861, guid: 2c4f5657c43b46d4a91e804c9e9e0f6c,
+        type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 1950487344666527861, guid: 2c4f5657c43b46d4a91e804c9e9e0f6c,
+        type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1080
+      objectReference: {fileID: 0}
     - target: {fileID: 6245044235665340415, guid: 2c4f5657c43b46d4a91e804c9e9e0f6c,
         type: 3}
       propertyPath: m_Pivot.x
