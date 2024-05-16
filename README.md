@@ -2,6 +2,4 @@
 
 Ce projet a été réalisé à deux, Patchouf et moi-même dans le cadre d'un cours d'Unity.
 
-# To do list:
-
-- Faire système de combat (monstres qui attaques)
+[To Download the game].(https://patchouf.itch.io/metal-knight)
